@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aserradero El Cerrito - Bienes Comunales de San Gerónimo Zacapexco</title>
+    <style>
+        :root {
+            --verde-oscuro: #1b331e;
+            --verde-claro: #1b9e57;
+            --marron: #8b5e3c;
+            --crema: #fcfbf9;
+            --gris-claro: #f4f6f0;
+            --texto: #2b2b2b;
+            --whatsapp: #25D366;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--crema);
+            color: var(--texto);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* --- BARRA DE LOGOTIPOS --- */
+        .top-bar {
+            background-color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--gris-claro);
+        }
+
+        .logo-container {
+            text-align: center;
+            max-width: 130px;
+            margin: 0.5rem;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo-placeholder {
+            width: 100px;
+            height: 100px;
+            background-color: var(--gris-claro);
+            border: 2px dashed var(--marron);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--marron);
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: var(--verde-oscuro);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--marron);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.3rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 1.2rem;
+            color: #dddfd4;
+        }
+
+        nav {
+            background-color: #244228;
+            padding: 0.75rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1.2rem;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4a373;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section {
+            background: white;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        h2 {
+            color: var(--verde-oscuro);
+            border-bottom: 3px solid var(--marron);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--gris-claro);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--marron);
+        }
+
+        /* --- PREGUNTAS FRECUENTES DINÁMICAS (ACORDEÓN) --- */
+        .faq-item {
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #dcdfd6;
+            background-color: var(--gris-claro);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: var(--verde-oscuro);
+            cursor: pointer;
+            padding: 1rem;
+            position: relative;
+            user-select: none;
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background-color: #e9ece3;
+        }
+
+        .faq-question::after {
+            content: '▾';
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1rem;
+            background-color: white;
+            color: #444;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1rem;
+        }
+
+        /* --- CARRUSEL DINÁMICO --- */
+        .carousel-container {
+            position: relative;
+            max-width: 800px;
+            margin: 1.5rem auto;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            height: 400px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            background-size: cover;
+            background-position: center;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .carousel-slide.active {
+            display: flex;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            margin: 0 10px;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover { background-color: rgba(0,0,0,0.8); }
+        .prev { left: 0; }
+        .next { right: 0; }
+
+        /* --- BUSCADOR Y TABLA --- */
+        .search-box {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid #dcdfd6;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+        }
+
+        table th, table td {
+            padding: 0.85rem;
+            border: 1px solid #dcdfd6;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #e9ece3;
+            color: var(--verde-oscuro);
+        }
+
+        tr:nth-child(even) { background-color: #f9fbf7; }
+
+        /* --- CALCULADORA --- */
+        .calc-box {
+            background-color: #e9ece3;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border: 1px solid var(--verde-claro);
+        }
+
+        .calc-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .calc-row select, .calc-row input {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--marron);
+            color: white;
+            padding: 0.85rem 2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover { 
+            background-color: var(--verde-oscuro); 
+            transform: translateY(-2px);
+        }
+
+        .btn-wa {
+            background-color: var(--whatsapp);
+            color: white;
+        }
+
+        .btn-wa:hover {
+            background-color: #1ebea5;
+        }
+
+        .btn-tel {
+            background-color: #333;
+            color: white;
+            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-tel:hover {
+            background-color: #000;
+        }
+
+        /* --- MAPA DIRECCIÓN --- */
+        .map-link-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gris-claro);
+            border: 2px solid #dcdfd6;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            height: calc(100% - 4rem);
+        }
+
+        .btn-map {
+            background-color: #4285F4;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s;
+            margin-top: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .btn-map:hover {
+            background-color: #357ae8;
+        }
+
+        /* --- BOTÓN FLOTANTE WHATSAPP --- */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 5px 15px rgba(0,0,0,0.3);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(5deg);
+            background-color: #1ebea5;
+        }
+
+        footer {
+            background-color: var(--verde-oscuro);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.95rem;
+            border-top: 5px solid var(--marron);
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.7rem; }
+            nav a { display: block; margin: 0.75rem 0; }
+            .carousel-slide { height: 250px; font-size: 1.2rem; }
+            .top-bar { flex-direction: column; gap: 1rem; }
+            .map-link-container { height: auto; margin-top: 1rem; }
+            .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/525618433188?text=Hola!%20Me%20gustaría%20solicitar%20información%20sobre%20la%20madera%20disponible%20en%20el%20Aserradero%20El%20Cerrito." 
+       class="whatsapp-float" 
+       target="_blank" 
+       title="Chatea con nosotros">
+       💬
+    </a>
+
+    <!-- BARRA VISUAL DE LOGOS -->
+    <div class="top-bar">
+        <div class="logo-container">
+            <img src="738927181_122096170383393766_6158810937207490797_n.jpg" alt="Escudo Oficial Bienes Comunales San Gerónimo Zacapexco" onerror="this.style.display='none'; document.getElementById('alt-logo1').style.display='flex'">
+            <div id="alt-logo1" class="logo-placeholder" style="display:none;">Sitio Oficial</div>
+        </div>
+        <div style="text-align: center;">
+            <span style="font-size: 0.85rem; letter-spacing: 2px; color: var(--marron); font-weight: bold;">NÚCLEO AGRARIO COMUNAL</span>
+        </div>
+        <div class="logo-container">
+            <img src="738759122_2434829713657178_8676321414762776464_n.jpg" alt="Sello Aserradero El Cerrito" onerror="this.style.display='none'; document.getElementById('alt-logo2').style.display='flex'">
+            <div id="alt-logo2" class="logo-placeholder" style="display:none;">Sello El Cerrito</div>
+        </div>
+    </div>
+
+    <header>
+        <h1>Empresa Social de Aserrío "El Cerrito"</h1>
+        <p>Bienes Comunales de San Gerónimo Zacapexco | Administración 2024 - 2027</p>
+    </header>
+
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#sustentabilidad">Sustentabilidad y Preguntas</a>
+        <a href="#galeria">Galería Forestal</a>
+        <a href="#precios">Precios y Cotizador</a>
+        <a href="#reglamento">Reglamento de Patio</a>
+        <a href="#administracion">Administración</a>
+        <a href="#contacto">Ubicación y Contacto</a>
+    </nav>
+
+    <div class="container" id="inicio">
+        
+        <!-- SECCIÓN NOSOTROS -->
+        <div class="section">
+            <h2>Nuestra Organización Comunitaria</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Misión</h3>
+                    <p>Mostrar el aprovechamiento con estrategias sustentables para el medio ambiente, transformando el recurso natural en productos de madera de pino de la más alta calidad para asegurar la viabilidad de nuestros bosques en un futuro cercano.</p>
+                </div>
+                <div class="card">
+                    <h3>Visión</h3>
+                    <p>Cumplir con las plenas expectativas de productividad, rendimiento y calidad de nuestros compradores, operando bajo un esquema normativo unificado que garantice el desarrollo social de nuestra comunidad.</p>
+                </div>
+            </div>
+            <p style="margin-top: 1.5rem; font-style: italic; color: #444; border-left: 3px solid var(--verde-claro); padding-left: 10px;">
+                * Todo nuestro abastecimiento forestal proviene de un esquema de aprovechamiento sustentable estrictamente certificado bajo estándares internacionales de legalidad y cuidado ambiental del <strong>FSC® (Forest Stewardship Council)</strong>.
+            </p>
+        </div>
+
+        <!-- SECCIÓN GESTIÓN, COMERCIALIZACIÓN Y LOGÍSTICA -->
+        <div class="section" id="sustentabilidad">
+            <h2>Gestión Forestal, Comercialización y Logística</h2>
+            <p>Haz clic en cualquiera de las siguientes preguntas para ver más detalles sobre nuestra operación:</p>
+            
+            <div class="faq-container">
+                <!-- Gestión Forestal -->
+                <div class="faq-item">
+                    <div class="faq-question">¿Con qué especies de madera trabajan?</div>
+                    <div class="faq-answer">Trabajamos principalmente con especies nativas de alta calidad: <em>Pinus montezumae</em> y <em>Pinus pseudostrobus</em>.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿El aserradero cuenta con las autorizaciones legales correspondientes?</div>
+                    <div class="faq-answer">Sí. Operamos bajo el amparo de la Secretaría de Medio Ambiente y Recursos Naturales (SEMARNAT), con el número de registro de autorización del Plan de Manejo Forestal: <strong>T-15-112-BCP/001</strong>.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Cuentan con alguna certificación ambiental?</div>
+                    <div class="faq-answer">Sí, contamos con la certificación internacional <strong>FSC® (Forest Stewardship Council)</strong>, lo que garantiza que nuestros productos provienen de bosques manejados de manera responsable y sustentable.</div>
+                </div>
+
+                <!-- Comercialización -->
+                <div class="faq-item">
+                    <div class="faq-question">¿Cada cuánto tiempo se actualiza la lista de precios oficiales?</div>
+                    <div class="faq-answer">Nuestros precios se actualizan de manera periódica de acuerdo con la volatilidad y las condiciones del mercado.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Existen descuentos por volumen o precios especiales?</div>
+                    <div class="faq-answer">Sí. Manejamos un esquema de precios diferenciado:
+                        <ul>
+                            <li>Tarifa para público en general (con opción a descuentos por volumen).</li>
+                            <li>Precio especial preferencial para comuneros legalmente reconocidos.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Cuáles son las formas de pago autorizadas?</div>
+                    <div class="faq-answer">Para su comodidad y seguridad, aceptamos:
+                        <ul>
+                            <li>Pago en efectivo.</li>
+                            <li>Transferencia bancaria directa a la cuenta oficial de Bienes Comunales.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Logística y Maquila -->
+                <div class="faq-item">
+                    <div class="faq-question">¿El aserradero cuenta con servicio de flete?</div>
+                    <div class="faq-answer">Sí, disponemos de servicio de transporte. El costo del flete es adicional y se calcula con base en la zona de entrega. Asimismo, si el cliente lo prefiere, puede acudir con su propio transporte para retirar su pedido directamente en nuestras instalaciones.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Qué servicios de maquila ofrecen en el patio?</div>
+                    <div class="faq-answer">Ofrecemos una amplia gama de servicios especializados para adaptarnos a sus proyectos:
+                        <ul>
+                            <li>Madera estufada y cepillada.</li>
+                            <li>Madera machimbrada o canteada.</li>
+                            <li>Cortes de madera personalizados y producción de medidas especiales sobre pedido.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN GALERÍA -->
+        <div class="section" id="galeria">
+            <h2>Galería del Patio e Instalaciones</h2>
+            <p>Monitoreo visual del manejo del recurso maderable, almacenamiento y cubicación técnica en San Gerónimo Zacapexco:</p>
+            
+            <div class="carousel-container">
+                <div class="carousel-slide active" id="slide1" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('medicion-madera.jpg');">
+                    Cubicación Técnica y Control de Dimensiones
+                </div>
+                <div class="carousel-slide" id="slide2" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('carga-camion.jpg');">
+                    Logística de Despacho y Carga de Material
+                </div>
+                <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800');">
+                    Patio de Maniobras y Troncos Clasificados
+                </div>
+                
+                <button class="carousel-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="carousel-btn next" onclick="changeSlide(1)">&#10095;</button>
+            </div>
+        </div>
+
+        <!-- SECCIÓN PRECIOS OFICIALES Y COTIZADOR -->
+        <div class="section" id="precios">
+            <h2>Lista Oficial de Cubicaciones y Precios</h2>
+            <p>Escribe palabras clave para buscar productos o calcular dimensiones requeridas en tu pedido:</p>
+            
+            <input type="text" id="searchInput" class="search-box" onkeyup="filterTable()" placeholder="🔍 Escribe para buscar (Ej: tabla, polín, tablón, barrote)...">
+
+            <table id="preciosTable">
+                <thead>
+                    <tr>
+                        <th>Producto / Presentación</th>
+                        <th>Clasificación / Dimensión</th>
+                        <th>Precio Unitario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Tabla de Pino (30 cm)</td><td>Clase 1A</td><td class="precio">$190.00</td></tr>
+                    <tr><td>Tabla de Pino (30 cm)</td><td>Clase 2A</td><td class="precio">$170.00</td></tr>
+                    <tr><td>Tabla de Pino (25 cm)</td><td>Clase 1A</td><td class="precio">$175.00</td></tr>
+                    <tr><td>Tabla de Pino (25 cm)</td><td>Clase 2A</td><td class="precio">$155.00</td></tr>
+                    <tr><td>Tabla de Pino (20 cm)</td><td>Clase 1A</td><td class="precio">$145.00</td></tr>
+                    <tr><td>Tabla de Pino (20 cm)</td><td>Clase 2A</td><td class="precio">$125.00</td></tr>
+                    <tr><td>Tabla de Pino (15 cm)</td><td>Clase 1A</td><td class="precio">$125.00</td></tr>
+                    <tr><td>Tabla de Pino (15 cm)</td><td>Clase 2A</td><td class="precio">$105.00</td></tr>
+                    <tr><td>Tablón de Pino 2" (30 cm)</td><td>Clase 1A - Estructural</td><td class="precio">$350.00</td></tr>
+                    <tr><td>Polín de Pino (Pieza)</td><td>Soporte Estándar</td><td class="precio">$90.00</td></tr>
+                    <tr><td>Barrote de Pino (Pieza)</td><td>Dimensión Estándar</td><td class="precio">$45.00</td></tr>
+                    <tr><td>Tarima armada (Pieza)</td><td>Estructura Ensamblada</td><td class="precio">$75.00</td></tr>
+                    <tr><td>Costera (Paquete 12 pzas)</td><td>Residuo Aprovechable</td><td class="precio">$300.00</td></tr>
+                    <tr><td>Leña de residuo (por m³)</td><td>Biomasa Seca</td><td class="precio">$250.00</td></tr>
+                </tbody>
+            </table>
+
+            <!-- CALCULADORA DE PRESUPUESTOS INTERACTIVA CON WHATSAPP -->
+            <div class="calc-box">
+                <h3>🧮 Calculadora de Presupuestos Automática</h3>
+                <p>Selecciona tu producto e introduce las piezas para calcular y opcionalmente enviar el pedido a WhatsApp:</p>
+                <div class="calc-row">
+                    <select id="calcProducto">
+                        <option value="190">Tabla de Pino 30cm 1A ($190.00)</option>
+                        <option value="170">Tabla de Pino 30cm 2A ($170.00)</option>
+                        <option value="145">Tabla de Pino 20cm 1A ($145.00)</option>
+                        <option value="350">Tablón de Pino 2" ($350.00)</option>
+                        <option value="90">Polín de Pino ($90.00)</option>
+                        <option value="45">Barrote de Pino ($45.00)</option>
+                        <option value="75">Tarima Armada ($75.00)</option>
+                        <option value="300">Costera Paquete 12 pzas ($300.00)</option>
+                    </select>
+                    <input type="number" id="calcCantidad" min="1" value="10" placeholder="Número de piezas">
+                    <button class="btn" onclick="calcularTotal()">Calcular Presupuesto</button>
+                    <!-- BOTÓN DINÁMICO DE WHATSAPP (APARECE DESPUÉS DE CALCULAR) -->
+                    <a id="btnEnviarWA" href="#" target="_blank" class="btn btn-wa" style="display: none; align-items: center; gap: 8px; justify-content: center;">
+                        💬 Enviar Pedido por WhatsApp
+                    </a>
+                </div>
+                <h4 style="margin: 0; color: var(--verde-oscuro);" id="resultadoCalc">Total Estimado: $1,900.00 MXN</h4>
+            </div>
+        </div>
+
+        <!-- SECCIÓN REGLAMENTO E HORARIOS -->
+        <div class="section" id="reglamento">
+            <h2>Reglamento Interno y Horarios de Patio</h2>
+            <p>Normativa obligatoria aprobada por la Asamblea General para regular el orden del patio de maniobras:</p>
+            <ul>
+                <li><strong>Entrega de pedidos:</strong> Por lo general, el material se carga y se entrega al momento de realizar la compra.</li>
+                <li><strong>Recepción de trozo (materia prima):</strong> Se realiza habitualmente por las tardes, a partir de las 19:00 horas.</li>
+                <li><strong>Ingreso Seguro:</strong> Queda estrictamente prohibido el acceso a personas bajo los efectos del alcohol o sustancias estupefacientes.</li>
+                <li><strong>Conducta y Respeto:</strong> No se tolerará el uso de lenguaje altisonante ni conductas que vulneren el respeto mutuo entre comuneros y compradores.</li>
+                <li><strong>Equipo de Protección:</strong> Es obligatorio portar calzado cerrado de protección apto para zonas con movimiento logístico de carga pesada.</li>
+                <li><strong>Trámites Administrativos:</strong> Toda labor de cubicación y pagos se validará únicamente en las oficinas asignadas para la administración.</li>
+                <li><strong>Prevención de Incendios:</strong> Queda prohibido encender fogatas o portar encendedores en las proximidades del almacenamiento de madera.</li>
+            </ul>
+        </div>
+
+        <!-- SECCIÓN ADMINISTRACIÓN Y GOBERNANZA -->
+        <div class="section" id="administracion">
+            <h2>Administración y Gobernanza</h2>
+            <p>El aserradero es administrado y respaldado por la representación legítima de nuestra comunidad:</p>
+            <h3>Comité de Administración Actual (Periodo 2024 - 2027)</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cargo</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Presidente de Bienes Comunales</strong></td>
+                        <td>Ing. Javier Mondragón González</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Secretaria</strong></td>
+                        <td>Reyna Morales González</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tesorero</strong></td>
+                        <td>Rafael Gutiérrez Cruz</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SECCIÓN CONTACTO -->
+        <div class="section" id="contacto">
+            <h2>Ubicación, Contacto y Redes de Distribución</h2>
+            <div class="grid-2">
+                <div>
+                    <p><strong>Dirección del Patio:</strong><br>Manzana 004, 54337 El Cerrito, Méx.</p>
+                    <p><strong>Teléfono Oficial:</strong><br>56 1843 3188</p>
+                    <p><strong>Encargado de Operaciones:</strong><br>Sarahi Gutíerrez </p>
+                    <p style="font-size: 0.9rem; color: #555; margin-bottom: 1rem;"><em>* Conexiones operativas directas con redes logísticas locales en San Gerónimo Zacapexco y San Antonio Yondeje.</em></p>
+                    
+                    <!-- BOTÓN DINÁMICO DE LLAMADA -->
+                    <a href="tel:5618433188" class="btn btn-tel">
+                        📞 Llamar al Aserradero
+                    </a>
+                </div>
+                <div>
+                    <div class="map-link-container">
+                        <p style="margin: 0; font-weight: bold; color: var(--verde-oscuro);">Aserradero "El Cerrito"</p>
+                        <p style="font-size: 0.9rem; color: #666; margin: 0.5rem 0;">Haz clic abajo para abrir la ubicación exacta del mapa en tiempo real, generar rutas de navegación o abrir con tu app móvil de GPS.</p>
+                        <a href="https://maps.app.goo.gl/Vq2jkk7XygQYCqvC7?g_st=iw" target="_blank" class="btn-map">
+                            📍 Abrir Mapa en Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Bienes Comunales de San Gerónimo Zacapexco. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- LÓGICA DE PROGRAMACIÓN INTERACTIVA -->
+    <script>
+        // 1. Verificación Inteligente de Imágenes Locales
+        function verificarImagenLocal(slideId, urlLocal, urlRespaldo) {
+            let img = new Image();
+            img.src = urlLocal;
+            img.onload = function() {
+                document.getElementById(slideId).style.backgroundImage = "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('" + urlLocal + "')";
+            };
+            img.onerror = function() {
+                document.getElementById(slideId).style.backgroundImage = "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('" + urlRespaldo + "')";
+            };
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            verificarImagenLocal('slide1', 'medicion-madera.jpg', 'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=800');
+            verificarImagenLocal('slide2', 'carga-camion.jpg', 'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?q=80&w=800');
+            
+            calcularTotal();
+        });
+
+        // 2. Carrusel de Fotos
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // 3. Buscador Dinámico de Productos
+        function filterTable() {
+            let input = document.getElementById("searchInput");
+            let filter = input.value.toLowerCase();
+            let table = document.getElementById("preciosTable");
+            let tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                let tdProducto = tr[i].getElementsByTagName("td")[0];
+                if (tdProducto) {
+                    let textValue = tdProducto.textContent || tdProducto.innerText;
+                    if (textValue.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        // 4. Calculadora de Carga y Enlace de WhatsApp Dinámico con el Nuevo Número
+        function calcularTotal() {
+            let select = document.getElementById("calcProducto");
+            let productoSeleccionado = select.options[select.selectedIndex].text;
+            let precio = parseFloat(select.value);
+            let cantidad = parseInt(document.getElementById("calcCantidad").value);
+            
+            if (isNaN(cantidad) || cantidad < 1) {
+                document.getElementById("calcCantidad").value = 1;
+                cantidad = 1;
+            }
+            
+            let total = precio * cantidad;
+            let totalFormateado = total.toLocaleString('es-MX', {minimumFractionDigits: 2});
+            
+            document.getElementById("resultadoCalc").innerText = "Total Estimado: $" + totalFormateado + " MXN";
+
+            let mensajeWhatsApp = `Hola Aserradero "El Cerrito", acabo de realizar una cotización desde su sitio web:\n\n` + 
+                                  `• Producto: ${productoSeleccionado}\n` +
+                                  `• Cantidad solicitada: ${cantidad} pieza(s)\n` +
+                                  `• Costo total aproximado: $${totalFormateado} MXN\n\n` +
+                                  `¿Tienen stock disponible de este material en su patio actualmente?`;
+
+            // URL configurada con el nuevo número: 525618433188
+            let urlWhatsApp = "https://wa.me/525618433188?text=" + encodeURIComponent(mensajeWhatsApp);
+            
+            let btnWA = document.getElementById("btnEnviarWA");
+            btnWA.href = urlWhatsApp;
+            btnWA.style.display = "inline-flex";
+        }
+
+        // 5. Acordeón Dinámico de FAQ
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                const isActive = parent.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(child => {
+                    child.classList.remove('active');
+                    child.querySelector('.faq-answer').style.maxHeight = null;
+                });
+
+                if (!isActive) {
+                    parent.classList.add('active');
+                    const answer = parent.querySelector('.faq-answer');
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
